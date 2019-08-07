@@ -64,4 +64,22 @@ newsContainer.addEventListener('click', event => {
     }
 });
 
+// Listen for clicks on Saved Container to delete articles
+savedContainer.addEventListener('click', event => {
+    if (event.target.classList[0].startsWith('deleteArticle')) {
+
+        const articleID = event.target.classList[0].split('--')[1];
+        
+        data.deleteArticle(articleID)
+            .then(data.getSavedArticles)
+            .then(parsedArticles => {
+                savedContainer.innerHTML = '';
+                parsedArticles.forEach(article => {
+                    const articleHTML = newsComponent.createSavedHTML(article);
+                    newsComponent.addToDOM(savedContainer, articleHTML);
+                });
+            });
+    }
+});
+
 

@@ -21,7 +21,7 @@ const newsComponent = Object.create({
                     <p>Date: ${savedArticle.date}</p>
                     <p>${savedArticle.content}</p>
                     <a href="${savedArticle.url}" target="_blank">Read Full Article</a>
-                    <button class="deleteArticle">Delete Article</button>
+                    <button class="deleteArticle--${savedArticle.id}">Delete Article</button>
                 </section>`;
     },
 

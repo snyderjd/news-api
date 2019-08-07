@@ -25,6 +25,13 @@ const data = Object.create({
         }).then(response => response.json());
     },
 
+    // Delete an article from articles.json
+    deleteArticle: (articleID) => {
+        return fetch(`http://localhost:8088/articles/${articleID}`, {
+            method: "DELETE"
+        }).then(response => response.json());
+    },
+
     buildSourceUrl: () => {
         const sourceIDs = ['bbc-news', 'bleacher-report', 'bloomberg', 'breitbart-news', 'business-insider',
             'cnbc', 'cnn', 'daily-mail', 'espn', 'fox-news', 'fox-sports', 'msnbc', 'nbc-news',
