@@ -22,7 +22,6 @@ sourceButton.addEventListener('click', event => {
         articles.forEach(article => {
             const articleHTML = newsComponent.createHTML(article);
             newsComponent.addToDOM(newsContainer, articleHTML);
-            console.log(article);
         });
     });
 });
@@ -42,7 +41,7 @@ newsContainer.addEventListener('click', event => {
         const url = button.parentElement.childNodes[11].href;
 
         const newArticle = newsComponent.createArticleObject(headline, image, source, date, content, url);
-        console.log(newArticle);
+        data.saveArticle(newArticle);
     }
 });
 

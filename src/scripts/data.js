@@ -4,13 +4,33 @@
 
 const data = Object.create({
 
+    // Request articles from the News API
     getData: (url) => {
         return fetch(url).then(response => response.text());
     },
 
+    // Take in an article and save it to articles.json
     saveArticle: (articleObject) => {
-
+        fetch('http://localhost:8088/articles', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(articleObject)
+        });
     },
+
+    // // Send an entry object to the server to be saved
+    // saveJournalEntry: function (entryObject) {
+    //     fetch("http://localhost:8088/journalEntries", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(entryObject),
+    //         cache: "no-cache"
+    //     });
+    // },
 
     buildSourceUrl: () => {
         const sourceIDs = ['bbc-news', 'bleacher-report', 'bloomberg', 'breitbart-news', 'business-insider',
