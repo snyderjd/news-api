@@ -13,6 +13,17 @@ const newsComponent = Object.create({
                 </section>`;
     },
 
+    createArticleObject: (headline, image, source, date, content, url) => {
+        return {
+            headline: headline,
+            image: image,
+            source: source,
+            date: date,
+            content: content,
+            url: url
+        };
+    },
+
     addToDOM: (container, HTMLString) => {
         container.innerHTML += HTMLString;
     },

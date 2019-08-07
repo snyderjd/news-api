@@ -8,6 +8,10 @@ const data = Object.create({
         return fetch(url).then(response => response.text());
     },
 
+    saveArticle: (articleObject) => {
+
+    },
+
     buildSourceUrl: () => {
         const sourceIDs = ['bbc-news', 'bleacher-report', 'bloomberg', 'breitbart-news', 'business-insider',
             'cnbc', 'cnn', 'daily-mail', 'espn', 'fox-news', 'fox-sports', 'msnbc', 'nbc-news',
@@ -44,7 +48,7 @@ const data = Object.create({
             if (checkbox.checked === true) {
                 sourceVars[i] = sourceIDs[i];
             }
-        }
+        };
 
         let sourceString = '';
 
@@ -57,7 +61,7 @@ const data = Object.create({
 
         });
         
-        const url = `https://newsapi.org/v2/everything?pageSize=100&sources=${sourceString}&apiKey=166549cb19424cffb804733499eec7dd`;
+        const url = `https://newsapi.org/v2/everything?pageSize=50&sources=${sourceString}&apiKey=166549cb19424cffb804733499eec7dd`;
 
         return url;
     }

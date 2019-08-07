@@ -17,6 +17,7 @@ sourceButton.addEventListener('click', event => {
     data.getData(url).then(textResponse => {
         const jsonResponse = JSON.parse(textResponse);
         const articles = jsonResponse.articles;
+        newsContainer.innerHTML = '';
 
         articles.forEach(article => {
             const articleHTML = newsComponent.createHTML(article);
@@ -24,6 +25,25 @@ sourceButton.addEventListener('click', event => {
             console.log(article);
         });
     });
+});
+
+// Add an event listener to the newsContainer and listen for clicks on 'save article' buttons
+newsContainer.addEventListener('click', event => {
+    console.log(event.target.classList[0]);
+
+    if (event.target.classList[0] === 'saveArticle') {
+        const button = event.target
+
+        const headline = button.parentElement.childNodes[1].textContent;
+        const image = button.parentElement.childNodes[3].src;
+        const source = button.parentElement.childNodes[5].textContent;
+        const date = button.parentElement.childNodes[7].textContent;
+        const content = button.parentElement.childNodes[9].textContent;
+        const url = button.parentElement.childNodes[11].href;
+
+        const newArticle = newsComponent.createArticleObject(headline, image, source, date, content, url);
+        console.log(newArticle);
+    }
 });
 
 const everything = 'https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=166549cb19424cffb804733499eec7dd';
