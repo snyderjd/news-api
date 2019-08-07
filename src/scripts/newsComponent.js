@@ -13,6 +13,18 @@ const newsComponent = Object.create({
                 </section>`;
     },
 
+    createSavedHTML: (savedArticle) => {
+        return `<section class="news__item">
+                    <h1>${savedArticle.headline}</h1>
+                    <img class="article__image" src="${savedArticle.image}" alt="">
+                    <h3>Source: ${savedArticle.source}</h3>
+                    <p>Date: ${savedArticle.date}</p>
+                    <p>${savedArticle.content}</p>
+                    <a href="${savedArticle.url}" target="_blank">Read Full Article</a>
+                    <button class="deleteArticle">Delete Article</button>
+                </section>`;
+    },
+
     createArticleObject: (headline, image, source, date, content, url) => {
         return {
             headline: headline,

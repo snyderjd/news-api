@@ -28,3 +28,10 @@
 .source__checkbox {
     width: 40%;
 }
+
+.saved__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+

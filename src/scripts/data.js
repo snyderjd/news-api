@@ -9,28 +9,21 @@ const data = Object.create({
         return fetch(url).then(response => response.text());
     },
 
+    // Get articles saved in articles.json
+    getSavedArticles: () => {
+        return fetch("http://localhost:8088/articles").then(response => response.json());
+    },
+
     // Take in an article and save it to articles.json
     saveArticle: (articleObject) => {
-        fetch('http://localhost:8088/articles', {
+        return fetch('http://localhost:8088/articles', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(articleObject)
-        });
+        }).then(response => response.json());
     },
-
-    // // Send an entry object to the server to be saved
-    // saveJournalEntry: function (entryObject) {
-    //     fetch("http://localhost:8088/journalEntries", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(entryObject),
-    //         cache: "no-cache"
-    //     });
-    // },
 
     buildSourceUrl: () => {
         const sourceIDs = ['bbc-news', 'bleacher-report', 'bloomberg', 'breitbart-news', 'business-insider',

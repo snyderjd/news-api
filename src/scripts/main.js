@@ -1,6 +1,16 @@
 import data from "./data.js";
 import newsComponent from "./newsComponent.js";
 
+// Load saved articles as soon as the page is rendered
+const savedContainer = document.querySelector('.saved__container');
+
+data.getSavedArticles().then(parsedArticles => {
+    parsedArticles.forEach(article => {
+        const articleHTML = newsComponent.createSavedHTML(article)
+        newsComponent.addToDOM(savedContainer, articleHTML);
+    });
+});
+
 // Create checkboxes for sources and render to the DOM
 const checkboxHTML = newsComponent.createSourceInputHTML();
 const inputContainer = document.querySelector('.source__container');
@@ -28,7 +38,6 @@ sourceButton.addEventListener('click', event => {
 
 // Add an event listener to the newsContainer and listen for clicks on 'save article' buttons
 newsContainer.addEventListener('click', event => {
-    console.log(event.target.classList[0]);
 
     if (event.target.classList[0] === 'saveArticle') {
         const button = event.target
@@ -40,32 +49,19 @@ newsContainer.addEventListener('click', event => {
         const content = button.parentElement.childNodes[9].textContent;
         const url = button.parentElement.childNodes[11].href;
 
+        // Create new article object
         const newArticle = newsComponent.createArticleObject(headline, image, source, date, content, url);
-        data.saveArticle(newArticle);
+
+        data.saveArticle(newArticle)
+            .then(data.getSavedArticles)
+            .then(parsedArticles => {
+                savedContainer.innerHTML = '';
+                parsedArticles.forEach(article => {
+                    const articleHTML = newsComponent.createSavedHTML(article);
+                    newsComponent.addToDOM(savedContainer, articleHTML);
+                });
+            });
     }
 });
 
-const everything = 'https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&apiKey=166549cb19424cffb804733499eec7dd';
-
-// data.getData(everything).then(textResponse => {
-//     const jsonResponse = JSON.parse(textResponse);
-//     const articles = jsonResponse.articles;
-
-//     articles.forEach(article => {
-//         const articleHTML = newsComponent.createHTML(article);
-//         newsComponent.addToDOM(newsContainer, articleHTML);
-//     });
-// });
-
-// // Console log sources data to see the available sources
-
-// const sources = 'https://newsapi.org/v2/sources?language=en&apiKey=166549cb19424cffb804733499eec7dd';
-
-// data.getData(sources).then(textResponse => {
-//     const jsonResponse = JSON.parse(textResponse);
-//     const sources = jsonResponse.sources;
-
-//     sources.forEach(source => {
-//     });
-// });
 
